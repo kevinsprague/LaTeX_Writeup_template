@@ -38,21 +38,24 @@ For longer codelistings use \verb|codefile|
 \step
 Here's a \verb|codefile| use:
 
-\codefile{test.c}
+\codefile{./examples/test.c}
 
 \step
 Inserting code, not too hard. But now let's say that we want to insert an image. Again, you need to follow the same rules as with codefile or codebox with regard to line spacing, but you can use the \verb|\image| command to insert an image. The first argument is optional, but the second is mandatory. LaTeX is backwards. The result of calling image without the first argument is:
 
-\image{hello.png}
+\image{./examples/jello.png}
 
 while the result of calling it with the first argument will be: 
 
-\image[You can caption an image by using the first argument to the image command.]{hello.png}
+\image[You can caption an image by using the first argument to the image command.]{./examples/default.png}
 
+There's probably a good argument for using \verb|\footnote| for images, in addition to captions. That would work in the following way:
+
+\verb|\image[<caption goes here>\footnote{footnote text}]{filename}|
 \step
 Alright so let's say now we want to get even more spicy and include an image below a codelisting. We could do something like \verb`\codefile\n\n\image`, but by doing so, we risk separating the code and its corresponding image. So we again use a minipage (behind the scenes) to make it so that the codebox and the image are inseparable.
 
-\codeimage[language=C]{test.c}{hello.png}{}
+\codeimage[language=C]{./examples/test.c}{./examples/hello.png}{}
 
 Due to the way that LaTeX does custom commands, there can only be a single optional argument, so the codebox additional arguments (language mainly) are optional, while the caption is required, but that can be left blank as is done above.
 \end{walkthrough}
@@ -60,9 +63,11 @@ Due to the way that LaTeX does custom commands, there can only be a single optio
 Here you'd talk about all of the things that people learn by reading your walkthrough.
 \end{conclusion}
 
+% If you know how to use bibTeX, it's likely better to use bibTeX than to just bullet a list of references.
+
 \begin{references}
-\reference There's a chance that these should be numbered instead of bulleted, not really sure. 
-\reference second ref
-\reference etc.
+\reference \figref{./examples/jello.png} was obtained by running \verb|hello.py| with the command line argument \verb|jello|
+\reference \verb|\figref{filename}| will do the reference to the figure number for that filename.
+\reference Add other references.
 \end{references}
 \end{document}

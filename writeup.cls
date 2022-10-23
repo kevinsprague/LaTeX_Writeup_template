@@ -24,7 +24,6 @@
         keywordstyle=\color{codepurple},
         commentstyle=\color{codered},
         }
-
 %%%%%%%%%%%%%%%% Variables %%%%%%%%%%%%%%%%%
 \def \author#1{\def\@author{#1}}
 \def \@author {}
@@ -75,8 +74,9 @@
 {
     \Large\begin{center}\textbf{References}\end{center}
     \normalsize
+    \begin{singlespace}
     \begin{itemize}
-}{\end{itemize}}
+}{\end{itemize}\end{singlespace}}
 \newcommand{\reference}{\item[-]}
 \newcommand{\codefile}[2][]{
     \minipage{\dimexpr\textwidth-2em}
@@ -90,6 +90,7 @@
     \centering
         \includegraphics[width=\maxwidth]{#2}
         \captionof{figure}{#1}
+        \label{fig:#2}
     \endminipage
     \end{center}
 }
@@ -101,9 +102,11 @@
             \codefile[#1]{#2}
             \includegraphics[width=\maxwidth]{#3}
             \captionof{figure}{#4}
+            \label{fig:#3}
         \endminipage
     \end{center}
 }
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
 \newcommand{\highlight}[2]{\colorbox{#1}{#2}}
 \lstnewenvironment{codebox}[1][]{\lstset{#1}\minipage{\dimexpr\textwidth-2em}}{\endminipage}
 \newcommand{\step}{\large\textbf{\subsection*{Step \arabic{stepnum}}}\stepcounter{stepnum}}
