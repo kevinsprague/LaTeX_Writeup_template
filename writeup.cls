@@ -29,6 +29,7 @@
 \def \author#1{\def\@author{#1}}
 \def \@author {}
 \def \challenge#1{\def\@challenge{#1}}
+\def \ctf#1{\def\@ctf{#1}}
 
 \makeatletter
 \def\maxwidth{%
@@ -41,7 +42,7 @@
 
 \def \printheader{
       \begin{center} 
-        \titlesize{\underline{\textbf{Challenge {\@challenge} Walkthrough}}} \\ 
+        \titlesize{\underline{\textbf{{\@ctf} {\@challenge} Walkthrough}}} \\ 
         \vspace{6pt}
        \large Author: \@author 
         \end{center}
