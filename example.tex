@@ -1,0 +1,67 @@
+\documentclass{writeup}
+\author{Kevin Sprague}
+\challenge{X}
+% Both author and challenge are required
+% This makes pretty heavy use of the writeup.cls class file, which renames some regular LaTeX environments (\colorbox -> \highlight, \lstlisting -> \codebox
+% I would have liked to use minted for the code listings, since listings is finicky and often fails (see python comments)
+% but 1. It's a bit of a pain in terms of compiling, and 2. It requires enabling shell escape
+%
+
+\begin{document}
+\summary{Showing the usage for the LaTeX walkthrough template.}
+
+\begin{walkthrough}
+% To add the next step, simply do \step.
+\step
+For inline code (like \verb`sed -i 's/.*//g' $1`), I usually just use \verb|\verb| or \verb|\texttt{code}|. For relatively short codelistings, the \verb|codebox| environment is fine:
+%verb<SEP>text<SEP> will ignore all tags/commands between the separators. 
+% It's pretty typical to use | as the separator, but there's no reason it couldn't use @ or ! or ~ or `
+
+% The [language = Python] is an optional argument. 
+%If you want to just format some output, you can leave it out. If you want to format a shell script, you can do [language=bash]
+% due to the way that minipages work, make sure there's either a \par or a blank line on both sides of a codebox.
+\begin{codebox}[language=Python]
+import sys
+def main():
+    greeting = sys.argv[1] if len(sys.argv) > 1 else `hello'
+    msg = f'{(*@\highlight{yellow}{greeting}@*)}, world'
+    print(msg) # print the message to stdout
+
+if __name__ == `__main__':
+    main()
+\end{codebox}
+
+To highlight things using a color, you can use: \verb|(*@\highlight{color}{code}@*)| within a codebox, or you can use \verb|\highlight{color}{text}| outside of a codebox.
+\bigbreak
+For longer codelistings use \verb|codefile|
+\step
+Here's a \verb|codefile| use:
+
+\codefile{test.c}
+
+\step
+Inserting code, not too hard. But now let's say that we want to insert an image. Again, you need to follow the same rules as with codefile or codebox with regard to line spacing, but you can use the \verb|\image| command to insert an image. The first argument is optional, but the second is mandatory. LaTeX is backwards. The result of calling image without the first argument is:
+
+\image{hello.png}
+
+while the result of calling it with the first argument will be: 
+
+\image[You can caption an image by using the first argument to the image command.]{hello.png}
+
+\step
+Alright so let's say now we want to get even more spicy and include an image below a codelisting. We could do something like \verb`\codefile\n\n\image`, but by doing so, we risk separating the code and its corresponding image. So we again use a minipage (behind the scenes) to make it so that the codebox and the image are inseparable.
+
+\codeimage[language=C]{test.c}{hello.png}{}
+
+Due to the way that LaTeX does custom commands, there can only be a single optional argument, so the codebox additional arguments (language mainly) are optional, while the caption is required, but that can be left blank as is done above.
+\end{walkthrough}
+\begin{conclusion}
+Here you'd talk about all of the things that people learn by reading your walkthrough.
+\end{conclusion}
+
+\begin{references}
+\reference There's a chance that these should be numbered instead of bulleted, not really sure. 
+\reference second ref
+\reference etc.
+\end{references}
+\end{document}
